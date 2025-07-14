@@ -1,45 +1,33 @@
 
 import React from 'react';
-import { Github, Linkedin, Mail, MapPin } from 'lucide-react';
+import { Github, Linkedin, Mail, MapPin, Instagram } from 'lucide-react';
 
 const Hero = () => {
   return (
-    <section id="home" className="min-h-screen flex items-center justify-center pt-20">
-      <div className="container mx-auto px-6 text-center">
-        <div className="animate-fade-in">
-          <div className="mb-8">
-            <div className="w-32 h-32 mx-auto rounded-full bg-gradient-to-r from-purple-400 to-pink-400 p-1 mb-6">
-              <div className="w-full h-full rounded-full bg-slate-800 flex items-center justify-center">
-                <span className="text-4xl font-bold text-white">KN</span>
-              </div>
-            </div>
-          </div>
-          
-          <h1 className="text-5xl md:text-7xl font-bold text-white mb-6">
+    <section id="home" className="min-h-screen flex items-center justify-center pt-32 pb-20 bg-transparent">
+      <div className="container mx-auto px-6 text-center flex flex-col items-center gap-8">
+        <div className="animate-fade-in w-full flex flex-col items-center gap-6">
+          <img src="/profile.jpg" alt="Profile" className="mx-auto mb-4 w-40 h-40 rounded-full object-cover shadow-lg border-4 border-primary" />
+          <h1 className="text-6xl md:text-8xl font-extrabold text-foreground mb-2 tracking-tight drop-shadow-lg">
             Krishnakumar Naik
           </h1>
-          
-          <p className="text-xl md:text-2xl text-purple-300 mb-4">
+          <p className="text-2xl md:text-3xl text-foreground/90 font-semibold mb-2">
             Full-Stack Web Developer
           </p>
-          
-          <p className="text-lg text-white/80 mb-2">
+          <p className="text-lg text-foreground/90 mb-2">
             MERN Stack | Java | Python | C | SQL
           </p>
-          
-          <div className="flex items-center justify-center text-white/60 mb-8">
-            <MapPin size={16} className="mr-2" />
+          <div className="flex items-center justify-center text-foreground/70 mb-4 gap-2">
+            <MapPin size={20} className="mr-2" />
             <span>Yellapur, Uttara Kannada</span>
           </div>
-          
-          <p className="text-lg text-white/70 max-w-2xl mx-auto mb-8">
+          <p className="text-lg text-foreground/90 max-w-2xl mx-auto mb-4">
             Passionate developer with expertise in full-stack development, creative skills in video editing and drawing, 
             and experience building innovative solutions like construction management tools and voice assistants.
           </p>
-          
-          <div className="flex justify-center space-x-6 mb-8">
+          <div className="flex justify-center space-x-6 mb-4">
             <a
-              href="https://github.com"
+              href="https://github.com/Krishnakumar-Naik"
               className="p-3 bg-white/10 rounded-full hover:bg-white/20 transition-colors duration-300"
               target="_blank"
               rel="noopener noreferrer"
@@ -47,7 +35,7 @@ const Hero = () => {
               <Github size={24} className="text-white" />
             </a>
             <a
-              href="https://linkedin.com"
+              href="https://www.linkedin.com/in/krishnakumar-naik/"
               className="p-3 bg-white/10 rounded-full hover:bg-white/20 transition-colors duration-300"
               target="_blank"
               rel="noopener noreferrer"
@@ -55,10 +43,12 @@ const Hero = () => {
               <Linkedin size={24} className="text-white" />
             </a>
             <a
-              href="mailto:krishna@example.com"
+              href="https://www.instagram.com/krishnakumar_naik_/"
               className="p-3 bg-white/10 rounded-full hover:bg-white/20 transition-colors duration-300"
+              target="_blank"
+              rel="noopener noreferrer"
             >
-              <Mail size={24} className="text-white" />
+              <Instagram size={24} className="text-white" />
             </a>
           </div>
           
