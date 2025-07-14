@@ -9,6 +9,8 @@ const Contact = () => {
     subject: '',
     message: ''
   });
+  const [sending, setSending] = useState(false);
+  const [status, setStatus] = useState('');
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     setFormData({
@@ -17,10 +19,26 @@ const Contact = () => {
     });
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    // Handle form submission here
-    console.log('Form submitted:', formData);
+    setSending(true);
+    setStatus('');
+    try {
+      const res = await fetch('http://localhost:5000/contact', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(formData),
+      });
+      if (res.ok) {
+        setStatus('Message sent successfully!');
+        setFormData({ name: '', email: '', subject: '', message: '' });
+      } else {
+        setStatus('Failed to send message. Please try again later.');
+      }
+    } catch (err) {
+      setStatus('Failed to send message. Please try again later.');
+    }
+    setSending(false);
   };
 
   return (
@@ -66,12 +84,24 @@ const Contact = () => {
                   </div>
                 </div>
                 <div className="flex items-center">
-                  <div className="w-12 h-12 rounded-full bg-gradient-to-r from-primary to-secondary flex items-center justify-center mr-4">
+                  <a
+                    href="https://www.google.com/maps?q=Yellapur,+Uttara+Kannada,+Karnataka"
+                    className="w-12 h-12 rounded-full bg-gradient-to-r from-primary to-secondary flex items-center justify-center mr-4 hover:scale-105 transition-transform duration-200"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
                     <MapPin size={20} className="text-white" />
-                  </div>
+                  </a>
                   <div>
                     <h4 className="text-foreground font-semibold">Location</h4>
-                    <p className="text-foreground/70">Yellapur, Uttara Kannada, Karnataka</p>
+                    <a
+                      href="https://www.google.com/maps?q=Yellapur,+Uttara+Kannada,+Karnataka"
+                      className="text-foreground/70 underline hover:text-primary transition-colors duration-300"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      Yellapur, Uttara Kannada, Karnataka
+                    </a>
                   </div>
                 </div>
               </div>
@@ -158,12 +188,16 @@ const Contact = () => {
               </div>
               <button
                 type="submit"
-                className="w-full flex items-center justify-center space-x-2 px-8 py-3 bg-gradient-to-r from-primary to-secondary text-white rounded-lg hover:from-secondary hover:to-primary transition-all duration-300 transform hover:scale-105 shadow-lg"
+                className="w-full flex items-center justify-center space-x-2 px-8 py-3 bg-gradient-to-r from-primary to-secondary text-white rounded-lg hover:from-secondary hover:to-primary transition-all duration-300 transform hover:scale-105 shadow-lg disabled:opacity-60 disabled:cursor-not-allowed"
+                disabled={sending}
               >
                 <Send size={20} />
-                <span>Send Message</span>
+                <span>{sending ? 'Sending...' : 'Send Message'}</span>
               </button>
             </form>
+            {status && (
+              <div className={`mt-4 text-center font-semibold ${status.includes('success') ? 'text-green-500' : 'text-red-500'}`}>{status}</div>
+            )}
           </div>
         </div>
       </div>
