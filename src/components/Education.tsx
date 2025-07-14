@@ -5,31 +5,19 @@ import { GraduationCap, Calendar, MapPin, Award } from 'lucide-react';
 const Education = () => {
   const educationData = [
     {
-      degree: "Bachelor's in Computer Science",
-      institution: "University/College Name",
-      location: "Karnataka, India",
-      period: "2020 - 2024",
-      grade: "First Class",
-      description: "Specialized in software development, data structures, algorithms, and full-stack web development.",
-      subjects: ["Data Structures & Algorithms", "Web Development", "Database Management", "Software Engineering", "Computer Networks", "Operating Systems"]
+      degree: "B.TECH",
+      institution: "Srinivas University",
+      specialization: "Computer Science"
     },
     {
-      degree: "Pre-University Course (12th)",
-      institution: "College Name",
-      location: "Uttara Kannada, Karnataka",
-      period: "2018 - 2020",
-      grade: "Distinction",
-      description: "Science stream with focus on Mathematics, Physics, and Chemistry.",
-      subjects: ["Mathematics", "Physics", "Chemistry", "Computer Science"]
+      degree: "PUC",
+      institution: "Y.T.S.S PU College",
+      specialization: "PCMCS"
     },
     {
-      degree: "Secondary School Certificate (10th)",
-      institution: "School Name",
-      location: "Yellapur, Uttara Kannada",
-      period: "2017 - 2018",
-      grade: "First Class",
-      description: "Strong foundation in core subjects with excellent academic performance.",
-      subjects: ["Mathematics", "Science", "Social Studies", "Languages"]
+      degree: "SSLC",
+      institution: "Y.T.S.S",
+      specialization: "KSEEB"
     }
   ];
 
@@ -52,50 +40,14 @@ const Education = () => {
               key={index}
               className="bg-white/5 backdrop-blur-sm rounded-xl p-8 border border-white/10 hover:bg-white/10 transition-all duration-300"
             >
-              <div className="flex flex-col md:flex-row md:items-start gap-6">
+              <div className="flex flex-col md:flex-row md:items-center gap-6">
                 <div className="w-16 h-16 rounded-full bg-gradient-to-r from-purple-400 to-pink-400 flex items-center justify-center flex-shrink-0">
                   <GraduationCap size={32} className="text-white" />
                 </div>
-
-                <div className="flex-1">
-                  <div className="flex flex-col md:flex-row md:items-center md:justify-between mb-4">
-                    <h3 className="text-2xl font-bold text-white mb-2 md:mb-0">
-                      {edu.degree}
-                    </h3>
-                    <div className="flex items-center text-purple-300">
-                      <Award size={16} className="mr-2" />
-                      <span className="font-semibold">{edu.grade}</span>
-                    </div>
-                  </div>
-
-                  <p className="text-xl text-purple-200 mb-4">{edu.institution}</p>
-
-                  <div className="flex flex-wrap items-center gap-4 mb-4 text-white/70">
-                    <div className="flex items-center">
-                      <Calendar size={16} className="mr-2" />
-                      <span>{edu.period}</span>
-                    </div>
-                    <div className="flex items-center">
-                      <MapPin size={16} className="mr-2" />
-                      <span>{edu.location}</span>
-                    </div>
-                  </div>
-
-                  <p className="text-white/80 mb-6">{edu.description}</p>
-
-                  <div>
-                    <h4 className="text-white font-semibold mb-3">Key Subjects:</h4>
-                    <div className="flex flex-wrap gap-2">
-                      {edu.subjects.map((subject, subIndex) => (
-                        <span
-                          key={subIndex}
-                          className="px-3 py-1 bg-white/10 rounded-full text-sm text-white/80 border border-white/20"
-                        >
-                          {subject}
-                        </span>
-                      ))}
-                    </div>
-                  </div>
+                <div className="flex-1 flex flex-col md:flex-row md:items-center md:justify-between gap-4">
+                  <h3 className="text-2xl font-bold text-white mb-2 md:mb-0">{edu.degree}</h3>
+                  <p className="text-xl text-purple-200 mb-2 md:mb-0">{edu.institution}</p>
+                  <p className="text-white/80">{edu.specialization}</p>
                 </div>
               </div>
             </div>
