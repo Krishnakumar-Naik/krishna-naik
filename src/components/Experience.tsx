@@ -5,7 +5,7 @@ import { Briefcase, Calendar, MapPin } from 'lucide-react';
 const Experience = () => {
   return (
     <section id="experience" className="py-20 bg-black/20">
-      <div className="container mx-auto px-6">
+      <div className="container mx-auto px-6 relative">
         <div className="text-center mb-16">
           <h2 className="text-4xl md:text-5xl font-bold text-white mb-6">
             Work Experience
@@ -14,55 +14,64 @@ const Experience = () => {
         </div>
 
         <div className="max-w-4xl mx-auto">
-          <div className="bg-white/5 backdrop-blur-sm rounded-xl p-8 border border-white/10">
-            <div className="flex items-center mb-6">
-              <div className="w-16 h-16 rounded-full bg-gradient-to-r from-blue-400 to-cyan-400 flex items-center justify-center mr-6">
-                <Briefcase size={32} className="text-white" />
+          <div className="bg-white/5 backdrop-blur-sm rounded-xl p-8 border border-white/10 flex flex-col items-center lg:items-stretch relative">
+            {/* Top row: left content and image */}
+            <div className="w-full flex flex-col lg:flex-row items-center lg:items-stretch">
+              <div className="flex-1">
+                <div className="flex items-center mb-6">
+                  <div className="w-16 h-16 rounded-full bg-gradient-to-r from-blue-400 to-cyan-400 flex items-center justify-center mr-6">
+                    <Briefcase size={32} className="text-white" />
+                  </div>
+                  <div>
+                    <h3 className="text-2xl font-bold text-white">Software Development Intern</h3>
+                    <p className="text-purple-300 text-lg">Eyeq dot net</p>
+                  </div>
+                </div>
+
+                <div className="flex flex-wrap items-center gap-4 mb-6 text-white/70">
+                  <div className="flex items-center">
+                    <Calendar size={16} className="mr-2" />
+                    <span>3 Months (Offline Internship)</span>
+                  </div>
+                  <div className="flex items-center">
+                    <MapPin size={16} className="mr-2" />
+                    <span>Mangaluru</span>
+                  </div>
+                </div>
+
+                <div className="mb-8">
+                  <h4 className="text-xl font-semibold text-white mb-4">Key Achievements:</h4>
+                  <ul className="space-y-3 text-white/80">
+                    <li className="flex items-start">
+                      <span className="w-2 h-2 bg-purple-400 rounded-full mt-2 mr-3 flex-shrink-0"></span>
+                      <span>Successfully completed 3 major projects during the internship period</span>
+                    </li>
+                    <li className="flex items-start">
+                      <span className="w-2 h-2 bg-purple-400 rounded-full mt-2 mr-3 flex-shrink-0"></span>
+                      <span>Gained hands-on experience in real-world software development processes</span>
+                    </li>
+                    <li className="flex items-start">
+                      <span className="w-2 h-2 bg-purple-400 rounded-full mt-2 mr-3 flex-shrink-0"></span>
+                      <span>Collaborated with professional development teams on live projects</span>
+                    </li>
+                    <li className="flex items-start">
+                      <span className="w-2 h-2 bg-purple-400 rounded-full mt-2 mr-3 flex-shrink-0"></span>
+                      <span>Applied MERN stack knowledge to solve real business problems</span>
+                    </li>
+                    <li className="flex items-start">
+                      <span className="w-2 h-2 bg-purple-400 rounded-full mt-2 mr-3 flex-shrink-0"></span>
+                      <span>Enhanced skills in project management and client communication</span>
+                    </li>
+                  </ul>
+                </div>
               </div>
-              <div>
-                <h3 className="text-2xl font-bold text-white">Software Development Intern</h3>
-                <p className="text-purple-300 text-lg">Eyeq dot net</p>
+              {/* Character2 image inside the card, right side on large screens, moved slightly down */}
+              <div className="hidden lg:flex items-start justify-end ml-8 mt-12">
+                <img src="/images/charecter2.png" alt="Character illustration" className="w-56 h-auto" />
               </div>
             </div>
-
-            <div className="flex flex-wrap items-center gap-4 mb-6 text-white/70">
-              <div className="flex items-center">
-                <Calendar size={16} className="mr-2" />
-                <span>3 Months (Offline Internship)</span>
-              </div>
-              <div className="flex items-center">
-                <MapPin size={16} className="mr-2" />
-                <span>Mangaluru</span>
-              </div>
-            </div>
-
-            <div className="mb-8">
-              <h4 className="text-xl font-semibold text-white mb-4">Key Achievements:</h4>
-              <ul className="space-y-3 text-white/80">
-                <li className="flex items-start">
-                  <span className="w-2 h-2 bg-purple-400 rounded-full mt-2 mr-3 flex-shrink-0"></span>
-                  <span>Successfully completed 3 major projects during the internship period</span>
-                </li>
-                <li className="flex items-start">
-                  <span className="w-2 h-2 bg-purple-400 rounded-full mt-2 mr-3 flex-shrink-0"></span>
-                  <span>Gained hands-on experience in real-world software development processes</span>
-                </li>
-                <li className="flex items-start">
-                  <span className="w-2 h-2 bg-purple-400 rounded-full mt-2 mr-3 flex-shrink-0"></span>
-                  <span>Collaborated with professional development teams on live projects</span>
-                </li>
-                <li className="flex items-start">
-                  <span className="w-2 h-2 bg-purple-400 rounded-full mt-2 mr-3 flex-shrink-0"></span>
-                  <span>Applied MERN stack knowledge to solve real business problems</span>
-                </li>
-                <li className="flex items-start">
-                  <span className="w-2 h-2 bg-purple-400 rounded-full mt-2 mr-3 flex-shrink-0"></span>
-                  <span>Enhanced skills in project management and client communication</span>
-                </li>
-              </ul>
-            </div>
-
-            <div className="bg-white/5 rounded-lg p-6">
+            {/* Bottom row: Skills Developed section, full width inside card */}
+            <div className="bg-white/5 rounded-lg p-6 mt-8 w-full">
               <h4 className="text-lg font-semibold text-white mb-3">Skills Developed:</h4>
               <div className="flex flex-wrap gap-2">
                 {['Team Collaboration', 'Project Management', 'Client Relations', 'Code Review', 'Agile Development', 'Problem Solving'].map((skill, index) => (
