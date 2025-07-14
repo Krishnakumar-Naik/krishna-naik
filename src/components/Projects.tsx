@@ -87,10 +87,6 @@ const Projects = () => {
               </div>
               
               <div className="flex space-x-4">
-                <button className="flex items-center space-x-2 px-4 py-2 bg-gradient-to-r from-purple-500 to-pink-500 rounded-lg hover:from-purple-600 hover:to-pink-600 transition-all duration-300">
-                  <ExternalLink size={16} />
-                  <span className="text-white text-sm">Live Demo</span>
-                </button>
                 <button className="flex items-center space-x-2 px-4 py-2 border border-white/30 rounded-lg hover:bg-white/10 transition-all duration-300">
                   <Github size={16} />
                   <span className="text-white text-sm">Code</span>
