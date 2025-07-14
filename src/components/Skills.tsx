@@ -56,7 +56,11 @@ const Skills = () => {
 
   return (
     <section id="skills" className="py-20 bg-black/20">
-      <div className="container mx-auto px-6">
+      <div className="container mx-auto px-6 relative">
+        {/* Char5 image at the left corner of the section header on large screens */}
+        <div className="hidden md:block absolute left-8 -top-20 z-10">
+          <img src="/images/char5.png" alt="Character illustration" className="w-80 h-auto" />
+        </div>
         <div className="text-center mb-16">
           <h2 className="text-4xl md:text-5xl font-bold text-white mb-6">
             Skills & Expertise
@@ -101,29 +105,33 @@ const Skills = () => {
         </div>
 
         <div className="mt-16 text-center">
-          <div className="bg-white/5 backdrop-blur-sm rounded-xl p-8 border border-white/10 max-w-4xl mx-auto">
-            <h3 className="text-2xl font-bold text-white mb-6">Additional Competencies</h3>
-            <div className="grid md:grid-cols-3 gap-8">
-              <div>
-                <div className="w-16 h-16 mx-auto mb-4 rounded-full bg-gradient-to-r from-yellow-400 to-orange-400 flex items-center justify-center">
-                  <Code size={32} className="text-white" />
+          <div className="bg-white/5 backdrop-blur-sm rounded-xl p-8 border border-white/10 max-w-4xl mx-auto flex flex-col md:flex-row items-center md:items-center relative">
+            {/* Char5 image breaking out of the card on the left */}
+            {/* Right side: competencies grid (remove spacer, restore card layout) */}
+            <div className="flex-1">
+              <h3 className="text-2xl font-bold text-white mb-6">Additional Competencies</h3>
+              <div className="grid md:grid-cols-3 gap-8">
+                <div>
+                  <div className="w-16 h-16 mx-auto mb-4 rounded-full bg-gradient-to-r from-yellow-400 to-orange-400 flex items-center justify-center">
+                    <Code size={32} className="text-white" />
+                  </div>
+                  <h4 className="text-white font-semibold mb-2">Problem Solving</h4>
+                  <p className="text-white/70 text-sm">Analytical thinking and innovative solution development for complex challenges</p>
                 </div>
-                <h4 className="text-white font-semibold mb-2">Problem Solving</h4>
-                <p className="text-white/70 text-sm">Analytical thinking and innovative solution development for complex challenges</p>
-              </div>
-              <div>
-                <div className="w-16 h-16 mx-auto mb-4 rounded-full bg-gradient-to-r from-pink-400 to-purple-400 flex items-center justify-center">
-                  <Video size={32} className="text-white" />
+                <div>
+                  <div className="w-16 h-16 mx-auto mb-4 rounded-full bg-gradient-to-r from-pink-400 to-purple-400 flex items-center justify-center">
+                    <Palette size={32} className="text-white" />
+                  </div>
+                  <h4 className="text-white font-semibold mb-2">Video Editing / Digital Art, Drawing</h4>
+                  <p className="text-white/70 text-sm">Creative video editing, digital illustration, and drawing skills for multimedia and artistic projects</p>
                 </div>
-                <h4 className="text-white font-semibold mb-2">Content Creation</h4>
-                <p className="text-white/70 text-sm">Video editing, visual storytelling, and multimedia content production</p>
-              </div>
-              <div>
-                <div className="w-16 h-16 mx-auto mb-4 rounded-full bg-gradient-to-r from-cyan-400 to-blue-400 flex items-center justify-center">
-                  <Globe size={32} className="text-white" />
+                <div>
+                  <div className="w-16 h-16 mx-auto mb-4 rounded-full bg-gradient-to-r from-cyan-400 to-blue-400 flex items-center justify-center">
+                    <Globe size={32} className="text-white" />
+                  </div>
+                  <h4 className="text-white font-semibold mb-2">Full-Stack Development</h4>
+                  <p className="text-white/70 text-sm">End-to-end application development from concept to deployment</p>
                 </div>
-                <h4 className="text-white font-semibold mb-2">Full-Stack Development</h4>
-                <p className="text-white/70 text-sm">End-to-end application development from concept to deployment</p>
               </div>
             </div>
           </div>
