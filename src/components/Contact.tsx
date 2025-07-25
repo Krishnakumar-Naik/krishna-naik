@@ -57,40 +57,40 @@ const Contact = () => {
           {/* Contact Information */}
           <div className="bg-card/80 shadow-xl rounded-2xl p-10 border border-border flex flex-col justify-center">
             <div className="space-y-8 mb-10">
-              <div>
+            <div>
                 <h3 className="text-2xl font-bold text-foreground mb-6">Let's Connect</h3>
                 <p className="text-foreground/80 mb-8">
-                  Whether you have a project in mind, want to collaborate, or just want to say hello, 
-                  I'd love to hear from you. Feel free to reach out through any of the channels below.
-                </p>
-              </div>
-              <div className="space-y-6">
-                <div className="flex items-center">
+                Whether you have a project in mind, want to collaborate, or just want to say hello, 
+                I'd love to hear from you. Feel free to reach out through any of the channels below.
+              </p>
+            </div>
+            <div className="space-y-6">
+              <div className="flex items-center">
                   <div className="w-12 h-12 rounded-full bg-gradient-to-r from-primary to-secondary flex items-center justify-center mr-4">
-                    <Mail size={20} className="text-white" />
-                  </div>
-                  <div>
+                  <Mail size={20} className="text-white" />
+                </div>
+                <div>
                     <h4 className="text-foreground font-semibold">Email</h4>
                     <p className="text-foreground/70">krishnaknaik25@gmail.com</p>
                   </div>
                 </div>
-                <div className="flex items-center">
+              <div className="flex items-center">
                   <div className="w-12 h-12 rounded-full bg-gradient-to-r from-primary to-secondary flex items-center justify-center mr-4">
-                    <Phone size={20} className="text-white" />
-                  </div>
-                  <div>
+                  <Phone size={20} className="text-white" />
+                </div>
+                <div>
                     <h4 className="text-foreground font-semibold">Phone</h4>
                     <p className="text-foreground/70">+91 6361313400</p>
                   </div>
                 </div>
-                <div className="flex items-center">
+              <div className="flex items-center">
                   <a
                     href="https://www.google.com/maps?q=Yellapur,+Uttara+Kannada,+Karnataka"
                     className="w-12 h-12 rounded-full bg-gradient-to-r from-primary to-secondary flex items-center justify-center mr-4 hover:scale-105 transition-transform duration-200"
                     target="_blank"
                     rel="noopener noreferrer"
                   >
-                    <MapPin size={20} className="text-white" />
+                  <MapPin size={20} className="text-white" />
                   </a>
                   <div>
                     <h4 className="text-foreground font-semibold">Location</h4>
@@ -102,28 +102,28 @@ const Contact = () => {
                     >
                       Yellapur, Uttara Kannada, Karnataka
                     </a>
-                  </div>
+                </div>
                 </div>
               </div>
-              <div className="pt-8">
+            <div className="pt-8">
                 <h4 className="text-foreground font-semibold mb-4">Find me on:</h4>
-                <div className="flex space-x-4">
-                  <a
+              <div className="flex space-x-4">
+                <a
                     href="https://github.com/Krishnakumar-Naik"
                     className="w-12 h-12 rounded-full bg-white/10 flex items-center justify-center hover:bg-primary/20 transition-colors duration-300"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                  >
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
                     <Github size={20} className="text-primary" />
-                  </a>
-                  <a
+                </a>
+                <a
                     href="https://www.linkedin.com/in/krishnakumar-naik/"
                     className="w-12 h-12 rounded-full bg-white/10 flex items-center justify-center hover:bg-primary/20 transition-colors duration-300"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                  >
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
                     <Linkedin size={20} className="text-primary" />
-                  </a>
+                </a>
                 </div>
               </div>
             </div>
