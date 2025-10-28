@@ -109,28 +109,28 @@ const Skills = () => {
             {/* Char5 image breaking out of the card on the left */}
             {/* Right side: competencies grid (remove spacer, restore card layout) */}
             <div className="flex-1">
-              <h3 className="text-2xl font-bold text-white mb-6">Additional Competencies</h3>
-              <div className="grid md:grid-cols-3 gap-8">
-                <div>
-                  <div className="w-16 h-16 mx-auto mb-4 rounded-full bg-gradient-to-r from-yellow-400 to-orange-400 flex items-center justify-center">
-                    <Code size={32} className="text-white" />
-                  </div>
-                  <h4 className="text-white font-semibold mb-2">Problem Solving</h4>
-                  <p className="text-white/70 text-sm">Analytical thinking and innovative solution development for complex challenges</p>
+            <h3 className="text-2xl font-bold text-white mb-6">Additional Competencies</h3>
+            <div className="grid md:grid-cols-3 gap-8">
+              <div>
+                <div className="w-16 h-16 mx-auto mb-4 rounded-full bg-gradient-to-r from-yellow-400 to-orange-400 flex items-center justify-center">
+                  <Code size={32} className="text-white" />
                 </div>
-                <div>
-                  <div className="w-16 h-16 mx-auto mb-4 rounded-full bg-gradient-to-r from-pink-400 to-purple-400 flex items-center justify-center">
+                <h4 className="text-white font-semibold mb-2">Problem Solving</h4>
+                <p className="text-white/70 text-sm">Analytical thinking and innovative solution development for complex challenges</p>
+              </div>
+              <div>
+                <div className="w-16 h-16 mx-auto mb-4 rounded-full bg-gradient-to-r from-pink-400 to-purple-400 flex items-center justify-center">
                     <Palette size={32} className="text-white" />
-                  </div>
+                </div>
                   <h4 className="text-white font-semibold mb-2">Video Editing / Digital Art, Drawing</h4>
                   <p className="text-white/70 text-sm">Creative video editing, digital illustration, and drawing skills for multimedia and artistic projects</p>
+              </div>
+              <div>
+                <div className="w-16 h-16 mx-auto mb-4 rounded-full bg-gradient-to-r from-cyan-400 to-blue-400 flex items-center justify-center">
+                  <Globe size={32} className="text-white" />
                 </div>
-                <div>
-                  <div className="w-16 h-16 mx-auto mb-4 rounded-full bg-gradient-to-r from-cyan-400 to-blue-400 flex items-center justify-center">
-                    <Globe size={32} className="text-white" />
-                  </div>
-                  <h4 className="text-white font-semibold mb-2">Full-Stack Development</h4>
-                  <p className="text-white/70 text-sm">End-to-end application development from concept to deployment</p>
+                <h4 className="text-white font-semibold mb-2">Full-Stack Development</h4>
+                <p className="text-white/70 text-sm">End-to-end application development from concept to deployment</p>
                 </div>
               </div>
             </div>
