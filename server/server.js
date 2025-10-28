@@ -15,6 +15,8 @@ app.use(express.json());
 // Multer setup for file uploads (in memory)
 const upload = multer({ storage: multer.memoryStorage() });
 
+app.get('/health', (req, res) => res.json({ ok: true }))
+
 app.post('/contact', async (req, res) => {
   const { name, email, subject, message } = req.body;
 
@@ -41,7 +43,8 @@ app.post('/contact', async (req, res) => {
 
     res.json({ success: true });
   } catch (error) {
-    res.status(500).json({ error: 'Failed to send email.' });
+    console.error('Contact sendMail error:', error)
+    res.status(500).json({ error: 'Failed to send email.', details: error?.message || String(error) });
   }
 });
 
@@ -76,7 +79,8 @@ app.post('/hire', upload.single('offerLetter'), async (req, res) => {
     await transporter.sendMail(mailOptions);
     res.json({ success: true });
   } catch (error) {
-    res.status(500).json({ error: 'Failed to send offer email.' });
+    console.error('Hire sendMail error:', error)
+    res.status(500).json({ error: 'Failed to send offer email.', details: error?.message || String(error) });
   }
 });
 
