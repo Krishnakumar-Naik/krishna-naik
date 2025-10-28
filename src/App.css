@@ -13,7 +13,7 @@ body {
 section {
   padding-top: 4rem;
   padding-bottom: 4rem;
-}
+  }
 
 .container {
   max-width: 1280px;
@@ -25,4 +25,48 @@ section {
 
 .read-the-docs {
   color: #888;
+}
+
+.profile-img-container {
+  position: relative;
+  width: fit-content;
+}
+
+.profile-img-bg {
+  position: absolute;
+  width: 120%;
+  height: 120%;
+  top: -10%;
+  left: -10%;
+  z-index: 1;
+}
+
+.profile-img {
+  position: relative;
+  width: 400px;  /* Increased from original size */
+  height: 400px;
+  z-index: 2;
+  border-radius: 50%;
+}
+
+.profile-img-container {
+  position: relative;
+  width: fit-content;
+}
+
+.profile-img-bg {
+  position: absolute;
+  width: 120%;
+  height: 120%;
+  top: -10%;
+  left: -10%;
+  z-index: 1;
+}
+
+.profile-img {
+  position: relative;
+  width: 400px;  /* Increased from original size */
+  height: 400px;
+  z-index: 2;
+  border-radius: 50%;
 }
