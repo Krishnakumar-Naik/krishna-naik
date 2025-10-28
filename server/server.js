@@ -1,5 +1,6 @@
 import express from 'express';
 import nodemailer from 'nodemailer';
+import sgMail from '@sendgrid/mail';
 import cors from 'cors';
 import dotenv from 'dotenv';
 import multer from 'multer';
@@ -44,6 +45,11 @@ function createTransporter() {
   });
 }
 
+// Configure SendGrid if key provided
+if (process.env.SENDGRID_API_KEY) {
+  sgMail.setApiKey(process.env.SENDGRID_API_KEY)
+}
+
 app.get('/health', (req, res) => res.json({ ok: true }))
 
 app.post('/contact', async (req, res) => {
@@ -54,17 +60,28 @@ app.post('/contact', async (req, res) => {
   }
 
   try {
-    const transporter = createTransporter();
-
-    await transporter.sendMail({
-      from: process.env.EMAIL_USER,
-      to: process.env.EMAIL_TO || process.env.EMAIL_USER,
-      subject: `Portfolio Contact: ${subject}`,
-      text: `Name: ${name}\nEmail: ${email}\n\n${message}`,
-      replyTo: email,
-    });
-
-    res.json({ success: true });
+    if (process.env.SENDGRID_API_KEY) {
+      // send via SendGrid
+      const msg = {
+        to: process.env.EMAIL_TO || process.env.EMAIL_USER,
+        from: process.env.EMAIL_USER,
+        subject: `Portfolio Contact: ${subject}`,
+        text: `Name: ${name}\nEmail: ${email}\n\n${message}`,
+        replyTo: email,
+      }
+      await sgMail.send(msg)
+      res.json({ success: true })
+    } else {
+      const transporter = createTransporter();
+      await transporter.sendMail({
+        from: process.env.EMAIL_USER,
+        to: process.env.EMAIL_TO || process.env.EMAIL_USER,
+        subject: `Portfolio Contact: ${subject}`,
+        text: `Name: ${name}\nEmail: ${email}\n\n${message}`,
+        replyTo: email,
+      })
+      res.json({ success: true })
+    }
   } catch (error) {
     console.error('Contact sendMail error:', error)
     res.status(500).json({ error: 'Failed to send email.', details: error?.message || String(error) });
@@ -80,29 +97,55 @@ app.post('/hire', upload.single('offerLetter'), async (req, res) => {
   }
 
   try {
-    const transporter = createTransporter();
+    if (process.env.SENDGRID_API_KEY) {
+      // convert attachment to base64 if present
+      const msg = {
+        to: process.env.EMAIL_TO || process.env.EMAIL_USER,
+        from: process.env.EMAIL_USER,
+        subject: `Hire Offer: ${offeringPosition} from ${companyName}`,
+        text: `You have received a new offer via your portfolio website.\n\nCompany Name: ${companyName}\nContact Email: ${contactEmail}\nRecruiter Name: ${yourName}\nRecruiter Position: ${yourPosition}\nOffering Position: ${offeringPosition}`,
+        replyTo: contactEmail,
+      }
+      if (file) {
+        msg.attachments = [
+          {
+            content: file.buffer.toString('base64'),
+            filename: file.originalname,
+            type: file.mimetype || 'application/octet-stream',
+            disposition: 'attachment',
+          },
+        ]
+      }
+      await sgMail.send(msg)
+      res.json({ success: true })
+    } else {
+      const transporter = createTransporter();
 
-    const mailOptions = {
-      from: process.env.EMAIL_USER,
-      to: process.env.EMAIL_TO || process.env.EMAIL_USER,
-      subject: `Hire Offer: ${offeringPosition} from ${companyName}`,
-      text: `You have received a new offer via your portfolio website.\n\nCompany Name: ${companyName}\nContact Email: ${contactEmail}\nRecruiter Name: ${yourName}\nRecruiter Position: ${yourPosition}\nOffering Position: ${offeringPosition}`,
-      replyTo: contactEmail,
-      attachments: file
-        ? [{ filename: file.originalname, content: file.buffer }]
-        : [],
-    };
+      const mailOptions = {
+        from: process.env.EMAIL_USER,
+        to: process.env.EMAIL_TO || process.env.EMAIL_USER,
+        subject: `Hire Offer: ${offeringPosition} from ${companyName}`,
+        text: `You have received a new offer via your portfolio website.\n\nCompany Name: ${companyName}\nContact Email: ${contactEmail}\nRecruiter Name: ${yourName}\nRecruiter Position: ${yourPosition}\nOffering Position: ${offeringPosition}`,
+        replyTo: contactEmail,
+        attachments: file
+          ? [{ filename: file.originalname, content: file.buffer }]
+          : [],
+      };
 
-    await transporter.sendMail(mailOptions);
-    res.json({ success: true });
+      await transporter.sendMail(mailOptions);
+      res.json({ success: true });
+    }
   } catch (error) {
     console.error('Hire sendMail error:', error)
     res.status(500).json({ error: 'Failed to send offer email.', details: error?.message || String(error) });
   }
 });
 
-// verify SMTP connection at startup (helpful for debugging connection issues)
-if (process.env.EMAIL_USER && process.env.EMAIL_PASS) {
+// At startup, if SendGrid HTTP API is configured we skip SMTP verification.
+if (process.env.SENDGRID_API_KEY) {
+  console.log('SendGrid API key detected — using SendGrid HTTP API for sending emails. Skipping SMTP verify.');
+} else if (process.env.EMAIL_USER && process.env.EMAIL_PASS) {
+  // verify SMTP connection at startup (helpful for debugging connection issues)
   const verifier = createTransporter();
   verifier.verify()
     .then(() => console.log('SMTP transporter verified'))
