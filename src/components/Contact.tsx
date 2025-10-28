@@ -24,19 +24,22 @@ const Contact = () => {
     setSending(true);
     setStatus('');
     try {
-      const res = await fetch('http://localhost:5000/contact', {
+      const res = await fetch('https://portfolio-backend-gq11.onrender.com/contact', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(formData),
       });
+      const body = await res.json().catch(() => ({}));
       if (res.ok) {
         setStatus('Message sent successfully!');
         setFormData({ name: '', email: '', subject: '', message: '' });
       } else {
-        setStatus('Failed to send message. Please try again later.');
+        console.error('Contact error response:', body);
+        setStatus(body?.error || body?.details || 'Failed to send message. Please try again later.');
       }
     } catch (err) {
-      setStatus('Failed to send message. Please try again later.');
+      console.error('Contact fetch error:', err);
+      setStatus(err?.message || 'Failed to send message. Please try again later.');
     }
     setSending(false);
   };
