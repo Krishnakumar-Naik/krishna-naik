@@ -2,6 +2,7 @@ import express from 'express';
 import nodemailer from 'nodemailer';
 import cors from 'cors';
 import dotenv from 'dotenv';
+import multer from 'multer';
 
 dotenv.config();
 
@@ -10,6 +11,9 @@ const PORT = process.env.PORT || 5000;
 
 app.use(cors());
 app.use(express.json());
+
+// Multer setup for file uploads (in memory)
+const upload = multer({ storage: multer.memoryStorage() });
 
 app.post('/contact', async (req, res) => {
   const { name, email, subject, message } = req.body;
@@ -38,6 +42,41 @@ app.post('/contact', async (req, res) => {
     res.json({ success: true });
   } catch (error) {
     res.status(500).json({ error: 'Failed to send email.' });
+  }
+});
+
+app.post('/hire', upload.single('offerLetter'), async (req, res) => {
+  const { companyName, contactEmail, yourName, yourPosition, offeringPosition } = req.body;
+  const file = req.file;
+
+  if (!companyName || !contactEmail || !yourName || !yourPosition || !offeringPosition) {
+    return res.status(400).json({ error: 'All fields except offer letter are required.' });
+  }
+
+  try {
+    const transporter = nodemailer.createTransport({
+      service: process.env.EMAIL_SERVICE,
+      auth: {
+        user: process.env.EMAIL_USER,
+        pass: process.env.EMAIL_PASS,
+      },
+    });
+
+    const mailOptions = {
+      from: process.env.EMAIL_USER,
+      to: process.env.EMAIL_TO || process.env.EMAIL_USER,
+      subject: `Hire Offer: ${offeringPosition} from ${companyName}`,
+      text: `You have received a new offer via your portfolio website.\n\nCompany Name: ${companyName}\nContact Email: ${contactEmail}\nRecruiter Name: ${yourName}\nRecruiter Position: ${yourPosition}\nOffering Position: ${offeringPosition}`,
+      replyTo: contactEmail,
+      attachments: file
+        ? [{ filename: file.originalname, content: file.buffer }]
+        : [],
+    };
+
+    await transporter.sendMail(mailOptions);
+    res.json({ success: true });
+  } catch (error) {
+    res.status(500).json({ error: 'Failed to send offer email.' });
   }
 });
 
