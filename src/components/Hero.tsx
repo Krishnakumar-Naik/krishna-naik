@@ -43,7 +43,7 @@ const Hero = () => {
               <div className="absolute inset-0 flex items-center justify-center pointer-events-none select-none">
                 <img src="/images/Brush.png" alt="Background brush" className="w-full h-full object-contain" style={{ filter: 'none', boxShadow: 'none' }} />
               </div>
-              <img src="/images/profile-img.png" alt="Profile" className="relative z-10 w-28 h-28 sm:w-40 sm:h-40 md:w-56 md:h-56 lg:w-80 lg:h-80 rounded-full object-cover shadow-2xl pl-[10px] pt-[19px] md:pl-0 md:pt-0" />
+              <img src="/images/profile-img.png" alt="Profile" className="relative z-10 w-28 h-28 sm:w-40 sm:h-40 md:w-56 md:h-56 lg:w-80 lg:h-80 rounded-full object-cover shadow-2xl pl-[10px] pt-[19px] md:pl-[28px] md:pt-[25px] lg:pl-[28px] lg:pt-[25px]" />
             </div>
           </div>
 
