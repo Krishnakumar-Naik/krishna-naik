@@ -145,11 +145,22 @@ app.post('/hire', upload.single('offerLetter'), async (req, res) => {
 if (process.env.SENDGRID_API_KEY) {
   console.log('SendGrid API key detected — using SendGrid HTTP API for sending emails. Skipping SMTP verify.');
 } else if (process.env.EMAIL_USER && process.env.EMAIL_PASS) {
-  // verify SMTP connection at startup (helpful for debugging connection issues)
-  const verifier = createTransporter();
-  verifier.verify()
-    .then(() => console.log('SMTP transporter verified'))
-    .catch(err => console.error('SMTP verify failed:', err));
+  // Allow skipping SMTP verify (useful on PaaS where verify may fail intermittently)
+  if (process.env.SKIP_SMTP_VERIFY === 'true') {
+    console.log('SKIP_SMTP_VERIFY=true — skipping SMTP transporter.verify() at startup.');
+  } else {
+    // verify SMTP connection at startup (helpful for debugging connection issues)
+    const verifier = createTransporter();
+    verifier.verify()
+      .then(() => console.log('SMTP transporter verified'))
+      .catch(err => {
+        console.error('SMTP verify failed:', err);
+        // Helpful hint for Gmail users - common cause is not using an App Password
+        if (process.env.SMTP_HOST && process.env.SMTP_HOST.includes('gmail')) {
+          console.error('Hint: Using Gmail SMTP requires a Google App Password (enable 2-Step Verification and create an App Password).');
+        }
+      });
+  }
 }
 
 app.listen(PORT, () => {
