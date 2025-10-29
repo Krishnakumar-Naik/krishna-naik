@@ -69,7 +69,7 @@ const Hero = () => {
               <a href="https://www.linkedin.com/in/krishnakumar-naik/" className="p-3 bg-white/10 rounded-full hover:bg-white/20 transition-colors duration-300" target="_blank" rel="noopener noreferrer">
                 <Linkedin size={24} className="text-white" />
               </a>
-              <a href="https://www.instagram.com/krishnakumar_naik_/" className="p-3 bg-white/10 rounded-full hover:bg-white/20 transition-colors duration-300" target="_blank" rel="noopener noreferrer">
+              <a href="https://www.instagram.com/krishnakumar___25/" className="p-3 bg-white/10 rounded-full hover:bg-white/20 transition-colors duration-300" target="_blank" rel="noopener noreferrer">
                 <Instagram size={24} className="text-white" />
               </a>
             </div>
