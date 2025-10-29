@@ -50,6 +50,42 @@ if (process.env.SENDGRID_API_KEY) {
   sgMail.setApiKey(process.env.SENDGRID_API_KEY)
 }
 
+// Log active email mode and basic config (no secrets)
+if (process.env.SENDGRID_API_KEY) {
+  console.log(`Email mode: SendGrid HTTP (from=${process.env.EMAIL_USER || 'unset'}, to=${process.env.EMAIL_TO || 'unset'})`);
+}
+
+// Optional startup SendGrid sanity check (uses sandbox mode so no real email is delivered)
+async function verifySendGridAtStartup() {
+  if (!process.env.SENDGRID_API_KEY) return;
+  const from = process.env.EMAIL_USER || process.env.EMAIL_TO;
+  const to = process.env.EMAIL_TO || process.env.EMAIL_USER || from;
+  if (!from) {
+    console.log('SendGrid startup check skipped: EMAIL_USER or EMAIL_TO not set');
+    return;
+  }
+  try {
+    const msg = {
+      to,
+      from,
+      subject: 'Portfolio API: SendGrid API key verification (sandbox)',
+      text: 'This is a non-delivery verification message (sandbox mode) to validate SendGrid API key and sender.',
+      mail_settings: {
+        sandbox_mode: {
+          enable: true,
+        },
+      },
+    };
+    await sgMail.send(msg);
+    console.log('SendGrid startup check: API key and sender appear valid (sandbox send accepted).');
+  } catch (err) {
+    console.error('SendGrid startup check failed:', err?.message || err);
+  }
+}
+
+// run the verification asynchronously but don't block startup
+verifySendGridAtStartup().catch(() => {});
+
 app.get('/health', (req, res) => res.json({ ok: true }))
 
 app.post('/contact', async (req, res) => {
@@ -61,16 +97,17 @@ app.post('/contact', async (req, res) => {
 
   try {
     if (process.env.SENDGRID_API_KEY) {
-      // send via SendGrid
+      // send via SendGrid (HTTP API). use reply_to per SendGrid spec
       const msg = {
         to: process.env.EMAIL_TO || process.env.EMAIL_USER,
         from: process.env.EMAIL_USER,
         subject: `Portfolio Contact: ${subject}`,
         text: `Name: ${name}\nEmail: ${email}\n\n${message}`,
-        replyTo: email,
-      }
-      await sgMail.send(msg)
-      res.json({ success: true })
+        reply_to: { email },
+      };
+      const [response] = await sgMail.send(msg);
+      console.log('SendGrid response:', response && response.statusCode);
+      return res.json({ success: true });
     } else {
       const transporter = createTransporter();
       await transporter.sendMail({
@@ -98,14 +135,14 @@ app.post('/hire', upload.single('offerLetter'), async (req, res) => {
 
   try {
     if (process.env.SENDGRID_API_KEY) {
-      // convert attachment to base64 if present
+      // convert attachment to base64 if present and use reply_to
       const msg = {
         to: process.env.EMAIL_TO || process.env.EMAIL_USER,
         from: process.env.EMAIL_USER,
         subject: `Hire Offer: ${offeringPosition} from ${companyName}`,
         text: `You have received a new offer via your portfolio website.\n\nCompany Name: ${companyName}\nContact Email: ${contactEmail}\nRecruiter Name: ${yourName}\nRecruiter Position: ${yourPosition}\nOffering Position: ${offeringPosition}`,
-        replyTo: contactEmail,
-      }
+        reply_to: { email: contactEmail },
+      };
       if (file) {
         msg.attachments = [
           {
@@ -114,10 +151,11 @@ app.post('/hire', upload.single('offerLetter'), async (req, res) => {
             type: file.mimetype || 'application/octet-stream',
             disposition: 'attachment',
           },
-        ]
+        ];
       }
-      await sgMail.send(msg)
-      res.json({ success: true })
+      const [response] = await sgMail.send(msg);
+      console.log('SendGrid response:', response && response.statusCode);
+      return res.json({ success: true });
     } else {
       const transporter = createTransporter();
 
