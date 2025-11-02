@@ -55,8 +55,7 @@ const Hero = () => {
             <p className="text-base sm:text-lg md:text-2xl text-foreground/90 font-semibold">Full-Stack Web Developer</p>
             <p className="text-sm md:text-lg text-foreground/90">MERN Stack | Java | Python | C | SQL</p>
             <div className="flex items-center text-foreground/70 gap-2 mt-2">
-              <MapPin size={18} />
-              <span className="text-sm">Yellapur, Uttara Kannada</span>
+              <span className="text-sm">B.Tech - Computer Science &amp; Engineering (8.7 CGPA) — 2022–26</span>
             </div>
             <p className="text-sm md:text-base text-foreground/90 max-w-xl mt-4">
               Passionate developer with expertise in full-stack development, creative skills in video editing and drawing, and experience building innovative solutions like construction management tools and voice assistants.
