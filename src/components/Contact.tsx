@@ -56,9 +56,9 @@ const Contact = () => {
             I'm always open to discussing new opportunities, projects, or just having a conversation about technology and development.
           </p>
         </div>
-        <div className="max-w-6xl mx-auto grid lg:grid-cols-2 gap-12">
+  <div className="max-w-6xl mx-auto grid lg:grid-cols-2 gap-12 place-items-center lg:place-items-stretch">
           {/* Contact Information */}
-          <div className="bg-card/80 shadow-xl rounded-2xl p-10 border border-border flex flex-col justify-center">
+          <div className="bg-card/80 shadow-xl rounded-2xl p-10 border border-border flex flex-col justify-center mx-auto max-w-md lg:mx-0 lg:max-w-none justify-self-center lg:justify-self-auto -ml-[14px] lg:ml-0">
             <div className="space-y-8 mb-10">
             <div>
                 <h3 className="text-2xl font-bold text-foreground mb-6">Let's Connect</h3>
@@ -132,7 +132,7 @@ const Contact = () => {
             </div>
           </div>
           {/* Contact Form */}
-          <div className="bg-card/80 shadow-xl rounded-2xl p-10 border border-border flex flex-col justify-center">
+          <div className="bg-card/80 shadow-xl rounded-2xl p-10 border border-border flex flex-col justify-center mx-auto max-w-md lg:mx-0 lg:max-w-none justify-self-center lg:justify-self-auto">
             <h3 className="text-2xl font-bold text-foreground mb-6">Send me a message</h3>
             <form onSubmit={handleSubmit} className="space-y-6">
               <div className="grid md:grid-cols-2 gap-6">
