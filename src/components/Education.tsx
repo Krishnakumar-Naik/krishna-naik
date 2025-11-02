@@ -5,9 +5,11 @@ import { GraduationCap, Calendar, MapPin, Award } from 'lucide-react';
 const Education = () => {
   const educationData = [
     {
-      degree: "B.TECH",
+      degree: "B.Tech - Computer Science & Engineering",
       institution: "Srinivas University",
-      specialization: "Computer Science"
+      specialization: "Computer Science & Engineering",
+      cgpa: "8.7 CGPA",
+      years: "2022 — 2026"
     },
     {
       degree: "PUC",
@@ -38,16 +40,23 @@ const Education = () => {
           {educationData.map((edu, index) => (
             <div
               key={index}
-              className="bg-white/5 backdrop-blur-sm rounded-xl p-8 border border-white/10 hover:bg-white/10 transition-all duration-300"
+              className="bg-white/5 backdrop-blur-sm rounded-xl p-6 md:p-8 border border-white/10 hover:bg-white/10 transition-all duration-300"
             >
-              <div className="flex flex-col md:flex-row md:items-center gap-6">
-                <div className="w-16 h-16 rounded-full bg-gradient-to-r from-purple-400 to-pink-400 flex items-center justify-center flex-shrink-0">
-                  <GraduationCap size={32} className="text-white" />
+              <div className="flex items-start md:items-center gap-4">
+                <div className="w-14 h-14 rounded-full bg-gradient-to-r from-purple-400 to-pink-400 flex items-center justify-center flex-shrink-0 mt-1 md:mt-0">
+                  <GraduationCap size={28} className="text-white" />
                 </div>
-                <div className="flex-1 flex flex-col md:flex-row md:items-center md:justify-between gap-4">
-                  <h3 className="text-2xl font-bold text-white mb-2 md:mb-0">{edu.degree}</h3>
-                  <p className="text-xl text-purple-200 mb-2 md:mb-0">{edu.institution}</p>
-                  <p className="text-white/80">{edu.specialization}</p>
+                <div className="flex-1">
+                  <div className="flex items-start md:items-center justify-between gap-4">
+                    <div>
+                      <h3 className="text-2xl font-bold text-white">{edu.degree}</h3>
+                      <p className="text-sm text-white/80 mt-1">{edu.institution} • <span className="text-white/70">{edu.specialization}</span></p>
+                    </div>
+                    <div className="text-right">
+                      {edu.years && <p className="text-sm text-white/60">{edu.years}</p>}
+                      {edu.cgpa && <div className="mt-2 inline-block bg-gradient-to-r from-green-400 to-teal-400 text-black text-sm font-semibold px-3 py-1 rounded-full">{edu.cgpa}</div>}
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>
