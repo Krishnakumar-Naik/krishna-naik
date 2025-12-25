@@ -2,7 +2,7 @@
 
 ## Project info
 
-This is a personal portfolio project built with Vite, TypeScript, React, shadcn-ui, and Tailwind CSS.
+This is a personal portfolio project.
 
 ## What technologies are used for this project?
 
