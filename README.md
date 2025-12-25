@@ -1,4 +1,4 @@
-# krishna-naik-portfolio
+# Krishnakumar-Naik-portfolio
 
 ## Project info
 
