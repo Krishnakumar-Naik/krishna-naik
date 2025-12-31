@@ -4,6 +4,7 @@ import Header from '../components/Header';
 import Hero from '../components/Hero';
 import About from '../components/About';
 import Projects from '../components/Projects';
+import Certificates from '../components/Certificates';
 import Experience from '../components/Experience';
 import Skills from '../components/Skills';
 import Contact from '../components/Contact';
@@ -11,11 +12,12 @@ import Footer from '../components/Footer';
 
 const Index = () => {
   return (
-  <div className="min-h-screen bg-gradient-to-br from-slate-900 via-[#3a0a40] to-slate-900">
+    <div className="min-h-screen bg-gradient-to-br from-slate-900 via-[#3a0a40] to-slate-900">
       <Header />
       <Hero />
       <About />
       <Projects />
+      <Certificates />
       <Experience />
       <Skills />
       <Contact />
